@@ -119,7 +119,8 @@ app.get("/mentor/:mentorid/student", async (req, res) => {
     if (!mentor) {
       return res.status(404).json({ error: "Mentor not found" });
     }
-    res.status(200).send(mentor);
+    const student = await Student.find({ mentor: mentorid });
+    res.status(200).send(student);
   } catch (error) {
     res.status(404).json({ error: `The page not found` });
   }
